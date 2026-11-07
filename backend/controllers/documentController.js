@@ -58,7 +58,9 @@ function runPython(pdfPath,originalName){
         python.stderr.setEncoding("utf8") ; 
 
         python.stderr.on("data", data => {
+            const output = data.toString() ; 
             stderr += data ;
+            process.stderr.write(output) ; 
             if (stderr.length > MAX_OUTPUT){
                 python.kill() ;
                 if(!settled){

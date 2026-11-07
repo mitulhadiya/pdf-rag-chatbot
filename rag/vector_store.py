@@ -1,4 +1,3 @@
-import json
 import re
 from pathlib import Path
 from langchain_community.vectorstores import FAISS
@@ -34,6 +33,9 @@ def build_and_save_index(chunks,generation_directory):
         embedding=embeddings
     )
 
+    if vector_store.index.d != EMBEDDING_DIMENSION :
+        raise ValueError("Unexpected embedding dimension.") 
+
     vector_store.save_local(
         str(generation_directory / "faiss_index")
     )
@@ -55,6 +57,10 @@ def load_vector_store(generation_id):
         embeddings , 
         allow_dangerous_deserialization=True
     )
+
+    if vector_store.index.d != EMBEDDING_DIMENSION :
+        raise ValueError("Unexpected embedding dimension.") 
+    
     return vector_store 
 
 def search_chunks(question,generation_id,top_k=3) : 

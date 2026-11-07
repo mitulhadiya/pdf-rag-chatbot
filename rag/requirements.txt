@@ -6,7 +6,8 @@ langchain-text-splitters
 langchain-huggingface
 langchain-google-genai
 pypdf
-sentence-transformers
+fastembed
 numpy
 faiss-cpu
 python-dotenv
+psutil

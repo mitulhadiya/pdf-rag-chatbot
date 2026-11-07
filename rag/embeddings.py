@@ -1,15 +1,10 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-embeddings = HuggingFaceEmbeddings(
+embeddings = FastEmbedEmbeddings(
     model_name = MODEL_NAME ,
-    model_kwargs = {
-        "device" : "cpu"
-    } ,
-    encode_kwargs = {
-        "normalize_embeddings" : True
-    }
+    max_length = 512
 )
 
 def embed_document(chunks) :
